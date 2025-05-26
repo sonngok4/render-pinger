@@ -1,0 +1,24 @@
+name: Ping Render App
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"  # 👉 Chạy mỗi 15 phút
+  workflow_dispatch:        # Cho phép bạn chạy tay thủ công nếu muốn
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run ping.py
+        run: python ping.py
